@@ -1,0 +1,1251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Souq | Payyanur - Everything for Your Little One</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --pink: #f8dce5;
+    --peach: #ffeadc;
+    --cream: #fffaf4;
+    --purple: #8d78a9;
+    --dark: #373044;
+    --yellow: #ffe7a5;
+    --green: #dcebdc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* LOADING SCREEN */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity .6s, visibility .6s;
+}
+
+.loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: var(--purple);
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    to { transform: scale(1.12); }
+}
+
+/* FLOATING DECORATIONS */
+
+.floating {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-20px) rotate(8deg); }
+}
+
+.star {
+    color: #e8bb65;
+    font-size: 30px;
+}
+
+.cloud {
+    font-size: 55px;
+}
+
+.bubble {
+    position: fixed;
+    bottom: -50px;
+    border-radius: 50%;
+    background: rgba(248,220,229,.45);
+    pointer-events: none;
+    z-index: 0;
+    animation: bubbleRise 9s linear forwards;
+}
+
+@keyframes bubbleRise {
+    0% { transform: translateY(0) scale(.5); opacity: 0; }
+    20% { opacity: .8; }
+    100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+}
+
+/* NAVBAR */
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 17px 7%;
+    background: rgba(255,250,244,.9);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 25px rgba(50,30,60,.05);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--purple);
+}
+
+.logo span {
+    color: #e49bad;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: #dc91a9;
+}
+
+.nav-btn {
+    background: var(--purple);
+    color: white !important;
+    padding: 13px 23px;
+    border-radius: 30px;
+}
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 27px;
+    color: var(--purple);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    padding: 145px 8% 75px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(125deg,#fff6ee,#fce8ee,#f5eafa);
+}
+
+.hero-content {
+    z-index: 3;
+}
+
+.tag {
+    display: inline-block;
+    background: white;
+    color: var(--purple);
+    padding: 11px 19px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px,6vw,79px);
+    line-height: 1.08;
+    margin-bottom: 23px;
+}
+
+.hero h1 span {
+    color: #d78fa7;
+}
+
+.hero p {
+    font-size: 16px;
+    color: #716a79;
+    line-height: 1.9;
+    max-width: 480px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 16px 28px;
+    border-radius: 35px;
+    font-size: 14px;
+    font-weight: 800;
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(50,30,60,.13);
+}
+
+.btn-primary {
+    background: var(--purple);
+    color: white;
+}
+
+.btn-outline {
+    border: 2px solid var(--purple);
+    color: var(--purple);
+}
+
+.hero-image {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 510px;
+    object-fit: cover;
+    border-radius: 48% 48% 25px 25px;
+    box-shadow: 0 25px 65px rgba(90,60,90,.15);
+    animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-13px); }
+}
+
+.hero-note {
+    position: absolute;
+    bottom: 25px;
+    left: -30px;
+    background: white;
+    padding: 18px 23px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.hero-note span {
+    color: #e1a2b5;
+    font-size: 20px;
+}
+
+/* SECTION COMMON */
+
+section {
+    padding: 100px 8%;
+    position: relative;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-heading small {
+    color: #d68fa8;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px,4vw,52px);
+    margin: 15px 0;
+}
+
+.section-heading p {
+    color: #817987;
+    line-height: 1.8;
+}
+
+/* CATEGORIES */
+
+.categories {
+    background: white;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.category-card {
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    background: #f9e5e9;
+    transition: .4s;
+}
+
+.category-card:nth-child(2) { background: #f7e9d8; }
+.category-card:nth-child(3) { background: #e8e5f5; }
+.category-card:nth-child(4) { background: #e4f0e5; }
+.category-card:nth-child(5) { background: #fff0d7; }
+.category-card:nth-child(6) { background: #f5e5ed; }
+
+.category-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(70,50,80,.12);
+}
+
+.category-card img {
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.category-card:hover img {
+    transform: scale(1.06);
+}
+
+.category-info {
+    padding: 23px;
+    text-align: center;
+    position: relative;
+}
+
+.category-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.category-info p {
+    font-size: 13px;
+    color: #77717c;
+    line-height: 1.7;
+}
+
+/* ABOUT */
+
+.about {
+    background: #fff4ed;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 15px 15px 0 #f3d6df;
+}
+
+.about-content small {
+    color: #d68fa8;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.about-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px,4vw,52px);
+    margin: 18px 0;
+    line-height: 1.2;
+}
+
+.about-content p {
+    color: #77717c;
+    line-height: 2;
+    margin-bottom: 18px;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 28px 0;
+}
+
+.feature {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.feature span {
+    font-size: 25px;
+}
+
+/* HIGHLIGHTS */
+
+.highlights {
+    background: white;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.highlight {
+    padding: 35px 15px;
+    text-align: center;
+    border-radius: 20px;
+    background: #fff5f2;
+    transition: .3s;
+}
+
+.highlight:hover {
+    transform: translateY(-8px);
+}
+
+.highlight span {
+    font-size: 38px;
+}
+
+.highlight h3 {
+    margin: 16px 0 8px;
+    font-size: 17px;
+}
+
+.highlight p {
+    font-size: 12px;
+    color: #817987;
+    line-height: 1.7;
+}
+
+/* REVIEWS */
+
+.reviews {
+    background: linear-gradient(120deg,#f8e8ef,#f4eefa);
+}
+
+.rating-box {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rating-number {
+    font-size: 65px;
+    font-weight: 800;
+    color: var(--purple);
+    font-family: 'Playfair Display', serif;
+}
+
+.stars {
+    color: #f2b844;
+    font-size: 25px;
+    letter-spacing: 4px;
+    margin: 8px 0;
+}
+
+.rating-box p {
+    color: #77717c;
+    font-size: 13px;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.review-card {
+    background: white;
+    border-radius: 22px;
+    padding: 30px;
+    transition: .3s;
+}
+
+.review-card:hover {
+    transform: translateY(-9px);
+}
+
+.review-card .stars {
+    font-size: 17px;
+}
+
+.review-card p {
+    line-height: 1.9;
+    font-size: 14px;
+    color: #716a79;
+    margin: 18px 0;
+}
+
+.review-card h4 {
+    font-size: 14px;
+}
+
+/* VISIT */
+
+.visit {
+    background: white;
+    text-align: center;
+}
+
+.visit-card {
+    background: linear-gradient(120deg,#fff1e7,#f6e8f2);
+    max-width: 850px;
+    margin: auto;
+    border-radius: 30px;
+    padding: 55px 30px;
+}
+
+.visit-card h2 {
+    font-family: 'Playfair Display',serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.visit-card p {
+    color: #77717c;
+    line-height: 2;
+    margin-bottom: 15px;
+}
+
+.visit-card .btn {
+    margin: 12px 5px;
+}
+
+.visit-emoji {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+/* MAP */
+
+.map-section {
+    padding-top: 20px;
+    background: white;
+}
+
+.map-section iframe {
+    width: 100%;
+    height: 380px;
+    border: 0;
+    border-radius: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #393143;
+    color: white;
+    padding: 65px 8% 25px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 45px;
+}
+
+footer h2 {
+    font-family: 'Playfair Display',serif;
+    font-size: 30px;
+    margin-bottom: 18px;
+    color: #f5c9d8;
+}
+
+footer h3 {
+    margin-bottom: 18px;
+    color: #f5c9d8;
+}
+
+footer p, footer a {
+    color: #d4cedb;
+    font-size: 13px;
+    line-height: 2.2;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid #665b70;
+    padding-top: 22px;
+    text-align: center;
+    color: #c5bdce;
+    font-size: 12px;
+}
+
+/* FLOATING WHATSAPP */
+
+.whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+    background: #25d366;
+    color: white;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+    transition: .3s;
+}
+
+.whatsapp:hover {
+    transform: scale(1.13);
+}
+
+/* SCROLL ANIMATIONS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(65px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-65px);
+    transition: .9s;
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(65px);
+    transition: .9s;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+    .hero, .about {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 145px;
+    }
+
+    .hero-image img {
+        height: 420px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .highlight-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .review-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:650px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 25px;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    section {
+        padding: 75px 6%;
+    }
+
+    .hero {
+        padding: 125px 6% 60px;
+        gap: 40px;
+    }
+
+    .hero h1 {
+        font-size: 49px;
+    }
+
+    .hero-image img {
+        height: 360px;
+    }
+
+    .category-grid,
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .highlight-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-image img {
+        height: 330px;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .visit-card h2 {
+        font-size: 32px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+    <h1>🧸 BABY SOUQ</h1>
+</div>
+
+<!-- NAVBAR -->
+
+<header>
+    <a href="#home" class="logo">BABY <span>SOUQ.</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Collections</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#visit" class="nav-btn">Visit Store ↗</a></li>
+    </ul>
+</header>
+
+<!-- HERO SECTION -->
+
+<section class="hero" id="home">
+
+    <div class="floating star" style="top:20%;left:5%">✦</div>
+    <div class="floating cloud" style="top:15%;right:5%">☁️</div>
+    <div class="floating star" style="bottom:15%;left:45%">✧</div>
+
+    <div class="hero-content reveal">
+        <div class="tag">WELCOME TO BABY SOUQ · PAYYANUR</div>
+
+        <h1>Little Things.<br><span>Big Happiness.</span></h1>
+
+        <p>
+            A magical shopping destination for your little ones.
+            Discover adorable baby clothes, beautiful toys,
+            nursery essentials and everything your child needs
+            under one roof.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#categories" class="btn btn-primary">Explore Collections ↗</a>
+            <a href="#visit" class="btn btn-outline">Visit Our Store</a>
+        </div>
+    </div>
+
+    <div class="hero-image reveal-right">
+        <img
+        src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=1000"
+        alt="Beautiful baby lifestyle">
+        <div class="hero-note">
+            <span>♡</span> Made for little smiles!
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORIES -->
+
+<section class="categories" id="categories">
+
+    <div class="section-heading reveal">
+        <small>OUR COLLECTIONS</small>
+        <h2>Everything Little Ones Love</h2>
+        <p>Explore a wonderful world of baby and kids essentials.</p>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=700" alt="Baby clothing">
+            <div class="category-info">
+                <h3>Baby Fashion 👕</h3>
+                <p>Adorable outfits and comfortable baby clothing.</p>
+            </div>
+        </div>
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1599623560574-39d485900c95?w=700" alt="Baby toys">
+            <div class="category-info">
+                <h3>Toys & Games 🧸</h3>
+                <p>Fun-filled toys for every age and imagination.</p>
+            </div>
+        </div>
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=700" alt="Baby essentials">
+            <div class="category-info">
+                <h3>Baby Essentials 🍼</h3>
+                <p>Everyday essentials for your little ones.</p>
+            </div>
+        </div>
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=700" alt="Kids toys">
+            <div class="category-info">
+                <h3>Kids Play Zone 🚗</h3>
+                <p>Electric cars, bikes and exciting playthings.</p>
+            </div>
+        </div>
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Baby shoes">
+            <div class="category-info">
+                <h3>Baby Accessories 👟</h3>
+                <p>Lovely accessories for every little adventure.</p>
+            </div>
+        </div>
+
+        <div class="category-card reveal">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700" alt="Baby shopping">
+            <div class="category-info">
+                <h3>Gifts & More 🎁</h3>
+                <p>Special gifts for birthdays and happy moments.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="about-image reveal-left">
+        <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=1000" alt="Mother and baby">
+    </div>
+
+    <div class="about-content reveal-right">
+        <small>OUR LITTLE WORLD</small>
+
+        <h2>Where Every Little Dream Begins.</h2>
+
+        <p>
+            Welcome to Baby Souq, Payyanur — a destination
+            for beautiful baby products, exciting toys and
+            everyday essentials for growing children.
+        </p>
+
+        <p>
+            From adorable newborn clothing to exciting
+            electric ride-on cars, explore a wide variety
+            of products with friendly customer assistance.
+        </p>
+
+        <div class="about-features">
+            <div class="feature"><span>🧸</span> Wonderful Toy Collection</div>
+            <div class="feature"><span>👶</span> Baby Clothing</div>
+            <div class="feature"><span>🎁</span> Gifts for Every Occasion</div>
+            <div class="feature"><span>💗</span> Friendly Customer Service</div>
+        </div>
+
+        <a href="#visit" class="btn btn-primary">Discover Baby Souq ↗</a>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+
+<section class="highlights">
+
+    <div class="section-heading reveal">
+        <small>THE BABY SOUQ EXPERIENCE</small>
+        <h2>Shopping Made Special</h2>
+        <p>A happy shopping experience for parents and little explorers.</p>
+    </div>
+
+    <div class="highlight-grid">
+
+        <div class="highlight reveal">
+            <span>🧸</span>
+            <h3>Huge Collection</h3>
+            <p>Discover toys and essentials for different ages.</p>
+        </div>
+
+        <div class="highlight reveal">
+            <span>💰</span>
+            <h3>Great Variety</h3>
+            <p>Explore products across different categories and budgets.</p>
+        </div>
+
+        <div class="highlight reveal">
+            <span>🤝</span>
+            <h3>Helpful Staff</h3>
+            <p>Friendly assistance to help you choose products.</p>
+        </div>
+
+        <div class="highlight reveal">
+            <span>💖</span>
+            <h3>Happy Shopping</h3>
+            <p>A welcoming destination for families and children.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- REVIEWS -->
+
+<section class="reviews" id="reviews">
+
+    <div class="section-heading reveal">
+        <small>LOVE FROM OUR CUSTOMERS</small>
+        <h2>Little Smiles, Big Reviews</h2>
+        <p>What customers are saying about Baby Souq.</p>
+    </div>
+
+    <div class="rating-box reveal">
+        <div class="rating-number">4.8/5</div>
+        <div class="stars">★★★★★</div>
+        <p>Based on 857 Google reviews (rating supplied by the client)</p>
+    </div>
+
+    <div class="review-grid">
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Best in town. Has huge varieties of kids items,
+                kids clothes, baby wears and toys. Products are
+                budget and quality orientated."
+            </p>
+            <h4>— Abhijith A K</h4>
+        </div>
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "A fantastic variety of toys for all ages.
+                The staff was super helpful and friendly
+                and the prices were reasonable too."
+            </p>
+            <h4>— Sindhu Prabhakaran</h4>
+        </div>
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Excellent service from the staff.
+                They supported us very much in delivering
+                toys at the right time."
+            </p>
+            <h4>— Ahalya Vikram</h4>
+        </div>
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Very friendly staff and great selection
+                of toys."
+            </p>
+            <h4>— Prema Nair</h4>
+        </div>
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Good customer service and superb collections."
+            </p>
+            <h4>— Sajeeda KK</h4>
+        </div>
+
+        <div class="review-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>
+                "One of the best shops for all kids' needs
+                in Payyanur. Great products and customer service."
+            </p>
+            <h4>— Anjana V V</h4>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VISIT STORE -->
+
+<section class="visit" id="visit">
+
+    <div class="visit-card reveal">
+
+        <div class="visit-emoji">🧸 ☁️ 💗</div>
+
+        <h2>Come Visit Our Little World!</h2>
+
+        <p>
+            Looking for beautiful toys, adorable baby clothes
+            or something special for your little one?
+        </p>
+
+        <p>
+            <strong>📍 Address:</strong><br>
+            National, Perumba Bridge, Perumba,<br>
+            Payyanur, Kerala – 670307
+        </p>
+
+        <p><strong>🕙 Store Hours:</strong> Open until 10 PM (as supplied)</p>
+
+        <p><strong>📞 Phone:</strong> 073566 07171</p>
+
+        <a href="tel:07356607171" class="btn btn-primary">
+            Call Us Now ☎
+        </a>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Baby+Souq+Perumba+Payyanur+Kerala"
+        target="_blank" rel="noopener" class="btn btn-outline">
+            Get Directions ↗
+        </a>
+
+    </div>
+
+</section>
+
+<!-- GOOGLE MAP -->
+
+<section class="map-section">
+    <div class="section-heading reveal">
+        <small>FIND US HERE</small>
+        <h2>Visit Baby Souq, Payyanur</h2>
+    </div>
+
+    <iframe
+    src="https://maps.google.com/maps?q=Baby%20Souq%20Perumba%20Payyanur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Baby Souq Payyanur map">
+    </iframe>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <h2>BABY SOUQ ♡</h2>
+            <p>
+                A wonderful destination for baby clothes,
+                toys, gifts and children's essentials.
+                Bringing happiness to little hearts in Payyanur.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <p><a href="#home">Home</a></p>
+            <p><a href="#categories">Collections</a></p>
+            <p><a href="#about">About Us</a></p>
+            <p><a href="#reviews">Customer Reviews</a></p>
+        </div>
+
+        <div>
+            <h3>Contact Us</h3>
+            <p>📍 Perumba, Payyanur</p>
+            <p>📞 073566 07171</p>
+            <p>🕙 Open until 10 PM</p>
+            <p><a href="tel:07356607171">Call Baby Souq ↗</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Baby Souq, Payyanur. All Rights Reserved.
+        <br>
+        Designed with ♡ for little ones.
+    </div>
+
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+
+<a class="whatsapp"
+href="https://wa.me/917356607171?text=Hello%20Baby%20Souq%2C%20I%20would%20like%20to%20know%20about%20your%20products."
+target="_blank"
+rel="noopener"
+aria-label="Chat with Baby Souq on WhatsApp">
+    ☎
+</a>
+
+<script>
+
+/* LOADING ANIMATION */
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hide");
+    }, 800);
+});
+
+/* MOBILE MENU */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+    });
+});
+
+/* SCROLL REVEAL ANIMATION */
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.12
+});
+
+document.querySelectorAll(".reveal, .reveal-left, .reveal-right")
+.forEach(element => {
+    observer.observe(element);
+});
+
+/* FLOATING BUBBLES */
+
+function createBubble() {
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const bubble = document.createElement("div");
+
+    bubble.classList.add("bubble");
+
+    const size = Math.random() * 25 + 10;
+
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "vw";
+    bubble.style.animationDuration = (Math.random() * 5 + 6) + "s";
+
+    document.body.appendChild(bubble);
+
+    setTimeout(() => {
+        bubble.remove();
+    }, 12000);
+}
+
+setInterval(createBubble, 1000);
+
+</script>
+
+</body>
+</html>
